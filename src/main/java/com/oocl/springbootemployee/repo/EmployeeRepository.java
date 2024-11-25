@@ -13,11 +13,6 @@ public class EmployeeRepository {
 
     private List<Employee> employees = new ArrayList<>();
 
-    public EmployeeRepository() {
-        employees.add(new Employee(1, 18, "ryan", Gender.MALE, new BigDecimal(8000)));
-        employees.add(new Employee(2, 18, "mason", Gender.MALE, new BigDecimal(8000)));
-        employees.add(new Employee(3, 18, "kevin", Gender.MALE, new BigDecimal(8000)));
-    }
 
     public List<Employee> getAll() {
         return employees;
@@ -39,5 +34,29 @@ public class EmployeeRepository {
     public Employee create(Employee employee) {
         employees.add(employee);
         return employee;
+    }
+
+    public Employee update(int id, Employee employee) {
+        Employee targetEmployee = employees.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (targetEmployee != null) {
+            targetEmployee.setAge(employee.getAge());
+            targetEmployee.setName(employee.getName());
+            targetEmployee.setGender(employee.getGender());
+            targetEmployee.setSalary(employee.getSalary());
+        }
+
+        return targetEmployee;
+    }
+
+    public void delete(int id) {
+        employees.removeIf(employee -> employee.getId() == id);
+    }
+
+    public List<Employee> getByPage(int page, int pageSize) {
+        return employees.subList((page - 1) * pageSize, page * pageSize);
     }
 }

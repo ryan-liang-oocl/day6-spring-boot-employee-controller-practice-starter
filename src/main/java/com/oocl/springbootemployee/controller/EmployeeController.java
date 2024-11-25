@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
 
-    private EmployeeRepository employeeRepository = new EmployeeRepository();
+    private final EmployeeRepository employeeRepository;
 
-    @GetMapping("all")
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    @GetMapping
     public List<Employee> getAll() {
         return employeeRepository.getAll();
     }
@@ -34,4 +38,20 @@ public class EmployeeController {
     public Employee create(@RequestBody Employee employee) {
         return employeeRepository.create(employee);
     }
+
+    @PutMapping("{id}")
+    public Employee update(@PathVariable int id, @RequestBody Employee employee) {
+        return employeeRepository.update(id, employee);
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable int id) {
+        employeeRepository.delete(id);
+    }
+
+    @GetMapping(params = {"page", "pageSize"})
+    public List<Employee> getByPage(@RequestParam int page, @RequestParam int pageSize) {
+        return employeeRepository.getByPage(page, pageSize);
+    }
+
 }
