@@ -39,7 +39,7 @@ class EmployeeControllerTest {
 
 
     @Test
-    void should_get_all_employees_when_call_getAll_given_employees() throws Exception {
+    void should_get_all_employees_when_getAll_given_employees() throws Exception {
         List<Employee> expectEmployeeList = employeeRepository.getAll();
         String employeesJSONString = client.perform(MockMvcRequestBuilders.get("/employee/all"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -53,7 +53,7 @@ class EmployeeControllerTest {
     }
 
     @Test
-    void should_get_right_employee_when_call_getById_given_employee_id() throws Exception {
+    void should_get_right_employee_when_getById_given_employee_id() throws Exception {
         //Given
         final List<Employee> givenEmployees = employeeRepository.getAll();
         final Integer employeeId = givenEmployees.get(0).getId();
@@ -67,7 +67,7 @@ class EmployeeControllerTest {
     }
 
     @Test
-    void should_get_right_employees_when_call_getByGender_given_gender() throws Exception {
+    void should_get_right_employees_when_getByGender_given_gender() throws Exception {
         //Given
         List<Employee> expectList = employeeRepository.getByGender(Gender.MALE);
         //When
@@ -85,7 +85,7 @@ class EmployeeControllerTest {
     }
 
     @Test
-    void should_create_employee_when_call_create_given_employee() throws Exception {
+    void should_create_employee_when_create_given_employee() throws Exception {
         //Given
         Employee employee = new Employee(4, 18, "Amy", Gender.FEMALE, new BigDecimal(8000));
         //When
