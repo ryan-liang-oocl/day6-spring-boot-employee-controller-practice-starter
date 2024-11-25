@@ -45,6 +45,7 @@ class EmployeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(employee.getId()))
                 .andExpect(jsonPath("$.age").value(employee.getAge()))
-                .andExpect(jsonPath("$.name").value(employee.getName()));
+                .andExpect(jsonPath("$.name").value(employee.getName()))
+                .andExpect(jsonPath("$.gender").value(employee.getGender().toString()));
     }
 }

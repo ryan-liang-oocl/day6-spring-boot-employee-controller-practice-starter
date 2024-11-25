@@ -1,3 +1,6 @@
 package com.oocl.springbootemployee.pojo;
 
-public enum Gender {MALE,    FEMALE}
+public enum Gender {
+    MALE,
+    FEMALE
+}
