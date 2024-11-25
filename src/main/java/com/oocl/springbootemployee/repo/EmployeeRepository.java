@@ -24,6 +24,20 @@ public class EmployeeRepository {
     }
 
     public Employee get(int id) {
-        return employees.stream().filter(employee -> employee.getId() == id).findFirst().orElse(null);
+        return employees.stream()
+                .filter(employee -> employee.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Employee> getByGender(Gender gender) {
+        return employees.stream()
+                .filter(employee -> employee.getGender().equals(gender))
+                .toList();
+    }
+
+    public Employee create(Employee employee) {
+        employees.add(employee);
+        return employee;
     }
 }

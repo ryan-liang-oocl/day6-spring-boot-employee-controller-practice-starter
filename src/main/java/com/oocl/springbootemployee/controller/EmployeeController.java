@@ -1,11 +1,10 @@
 package com.oocl.springbootemployee.controller;
 
 import com.oocl.springbootemployee.pojo.Employee;
+import com.oocl.springbootemployee.pojo.Gender;
 import com.oocl.springbootemployee.repo.EmployeeRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,12 +15,23 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository = new EmployeeRepository();
 
     @GetMapping("all")
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAll() {
         return employeeRepository.getAll();
     }
 
     @GetMapping("{id}")
-    public Employee getEmployee(@PathVariable int id) {
+    public Employee getById(@PathVariable int id) {
         return employeeRepository.get(id);
+    }
+
+    @GetMapping(params = {"gender"})
+    public List<Employee> getByGender(@RequestParam Gender gender) {
+        return employeeRepository.getByGender(gender);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee create(@RequestBody Employee employee) {
+        return employeeRepository.create(employee);
     }
 }
