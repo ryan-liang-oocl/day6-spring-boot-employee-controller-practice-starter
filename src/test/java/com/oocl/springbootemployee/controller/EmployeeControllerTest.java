@@ -149,12 +149,12 @@ class EmployeeControllerTest {
     @Test
     void should_get_right_employees_when_getByPage_given_page_and_pageSize() throws Exception {
         //Given
-        List<Employee> expectList = employeeRepository.getByPage(1, 3);
+        List<Employee> expectList = employeeRepository.getByPage(2, 2);
         //When
         //Then
         String employeesJSONString = client.perform(MockMvcRequestBuilders.get("/employees")
-                .param("page", "1")
-                .param("pageSize", "3"))
+                .param("page", "2")
+                .param("pageSize", "2"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(expectList.size())))
                 .andReturn().getResponse().getContentAsString();
