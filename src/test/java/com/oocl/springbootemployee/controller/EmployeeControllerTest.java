@@ -40,11 +40,11 @@ class EmployeeControllerTest {
 
     @Test
     void should_get_right_employee_when_call_getEmployee_given_employee_id() throws Exception {
-        List<Employee> expectEmployeeList = employeeRepository.getAll();
+        Employee employee = employeeRepository.get(1);
         client.perform(MockMvcRequestBuilders.get("/employee/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(expectEmployeeList.get(0).getId()))
-                .andExpect(jsonPath("$.age").value(expectEmployeeList.get(0).getAge()))
-                .andExpect(jsonPath("$.name").value(expectEmployeeList.get(0).getName()));
+                .andExpect(jsonPath("$.id").value(employee.getId()))
+                .andExpect(jsonPath("$.age").value(employee.getAge()))
+                .andExpect(jsonPath("$.name").value(employee.getName()));
     }
 }
